@@ -1,6 +1,0 @@
-
-Usage
------
-
-just install
-
