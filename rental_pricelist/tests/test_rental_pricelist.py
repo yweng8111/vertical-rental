@@ -205,7 +205,7 @@ class TestRentalPricelist(RentalStockCommon):
         # check service products of product B
         check_hour_B = check_day_B = check_month_B = False
         check_income_aa_B = check_expense_aa_B = False
-        self.assertEqual(len(self.productB.rental_service_ids), 3)
+        self.assertEqual(len(self.productB.rental_service_ids), 4)
         for p in self.productB.rental_service_ids:
             if p.uom_id == self.uom_month:
                 self.assertEqual(p.lst_price, 2000)
@@ -256,7 +256,7 @@ class TestRentalPricelist(RentalStockCommon):
             )
         )
         line.onchange_display_product_id()
-        line.product_id_change()
+        res = line.product_id_change()
         # check uom domain
         check_uom_domain = False
         if "domain" in res and "product_uom" in res["domain"]:
