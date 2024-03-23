@@ -34,39 +34,27 @@ msgstr ""
 msgid ""
 "<strong colspan=\"2\" attrs=\"{'invisible': [('product_rental_day_id', '=', "
 "False)]}\">\n"
-"                                    Bulk Prices\n"
-"                                </strong>"
+"                                Bulk Prices\n"
+"                            </strong>"
 msgstr ""
-"<strong colspan=\"2\" attrs=\"{'invisible': [('product_rental_day_id', '=', "
-"False)]}\">\n"
-"                                    Staffelpreise\n"
-"                                </strong>"
 
 #. module: rental_pricelist
 #: model_terms:ir.ui.view,arch_db:rental_pricelist.product_normal_form_view
 msgid ""
 "<strong colspan=\"2\" attrs=\"{'invisible': [('product_rental_hour_id', '=', "
 "False)]}\">\n"
-"                                    Bulk Prices\n"
-"                                </strong>"
+"                                Bulk Prices\n"
+"                            </strong>"
 msgstr ""
-"<strong colspan=\"2\" attrs=\"{'invisible': [('product_rental_hour_id', '=', "
-"False)]}\">\n"
-"                                    Staffelpreise\n"
-"                                </strong>"
 
 #. module: rental_pricelist
 #: model_terms:ir.ui.view,arch_db:rental_pricelist.product_normal_form_view
 msgid ""
 "<strong colspan=\"2\" attrs=\"{'invisible': [('product_rental_month_id', "
 "'=', False)]}\">\n"
-"                                    Bulk Prices\n"
-"                                </strong>"
+"                                Bulk Prices\n"
+"                            </strong>"
 msgstr ""
-"<strong colspan=\"2\" attrs=\"{'invisible': [('product_rental_month_id', "
-"'=', False)]}\">\n"
-"                                    Staffelpreise\n"
-"                                </strong>"
 
 #. module: rental_pricelist
 #: model_terms:ir.ui.view,arch_db:rental_pricelist.product_normal_form_view
@@ -477,11 +465,6 @@ msgid "Price at which the product is sold to customers."
 msgstr "Preis, zu dem das Produkt an den Kunden verkauft wird."
 
 #. module: rental_pricelist
-#: model_terms:ir.ui.view,arch_db:rental_pricelist.product_normal_form_view
-msgid "Pricelist Items"
-msgstr "Preislisten-Positionen"
-
-#. module: rental_pricelist
 #: model:ir.model,name:rental_pricelist.model_product_pricelist_item
 msgid "Pricelist Rule"
 msgstr ""
@@ -678,3 +661,39 @@ msgstr ""
 "auf dem Lagerplatz \"%s\" verfügbar! Es müssen in der Zwischenzeit entweder "
 "Einheiten zurück ins Lager kommen oder der Bestand auf dem Lagerplatz \"%s\" "
 "muss anderweitig erhöht werden."
+
+#~ msgid ""
+#~ "<strong colspan=\"2\" attrs=\"{'invisible': [('product_rental_day_id', "
+#~ "'=', False)]}\">\n"
+#~ "                                    Bulk Prices\n"
+#~ "                                </strong>"
+#~ msgstr ""
+#~ "<strong colspan=\"2\" attrs=\"{'invisible': [('product_rental_day_id', "
+#~ "'=', False)]}\">\n"
+#~ "                                    Staffelpreise\n"
+#~ "                                </strong>"
+
+#~ msgid ""
+#~ "<strong colspan=\"2\" attrs=\"{'invisible': [('product_rental_hour_id', "
+#~ "'=', False)]}\">\n"
+#~ "                                    Bulk Prices\n"
+#~ "                                </strong>"
+#~ msgstr ""
+#~ "<strong colspan=\"2\" attrs=\"{'invisible': [('product_rental_hour_id', "
+#~ "'=', False)]}\">\n"
+#~ "                                    Staffelpreise\n"
+#~ "                                </strong>"
+
+#~ msgid ""
+#~ "<strong colspan=\"2\" attrs=\"{'invisible': [('product_rental_month_id', "
+#~ "'=', False)]}\">\n"
+#~ "                                    Bulk Prices\n"
+#~ "                                </strong>"
+#~ msgstr ""
+#~ "<strong colspan=\"2\" attrs=\"{'invisible': [('product_rental_month_id', "
+#~ "'=', False)]}\">\n"
+#~ "                                    Staffelpreise\n"
+#~ "                                </strong>"
+
+#~ msgid "Pricelist Items"
+#~ msgstr "Preislisten-Positionen"

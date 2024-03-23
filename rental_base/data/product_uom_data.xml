@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <data>
         <record id="product_uom_month" model="uom.uom">
             <field name="name">Month(s)</field>
             <field name="uom_type">bigger</field>
@@ -13,5 +12,4 @@
             <field ref="uom.uom_categ_wtime" name="category_id" />
             <field name="factor" eval="0.143" />
         </record>
-    </data>
 </odoo>
