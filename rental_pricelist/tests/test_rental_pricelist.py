@@ -1,11 +1,17 @@
 # Part of rental-vertical See LICENSE file for full copyright and licensing details.
+import base64
+import io
+import logging
 
 from dateutil.relativedelta import relativedelta
+from PIL import Image
 
 from odoo import exceptions, fields
 from odoo.exceptions import ValidationError
 
 from odoo.addons.rental_base.tests.stock_common import RentalStockCommon
+
+log = logging.getLogger(__name__)
 
 
 def _run_sol_onchange_display_product_id(line):
@@ -316,13 +322,13 @@ class TestRentalPricelist(RentalStockCommon):
             )
         )
         line.onchange_display_product_id()
-        line.product_id_change()
+        res = line.product_id_change()
         # check uom domain
-        # check_uom_domain = False
-        # if "domain" in res and "product_uom" in res["domain"]:
-        #     self.assertEqual(res["domain"]["product_uom"][0][2][0], self.uom_month.id)
-        #     check_uom_domain = True
-        # self.assertTrue(check_uom_domain)
+        check_uom_domain = False
+        if "domain" in res and "product_uom" in res["domain"]:
+            self.assertEqual(res["domain"]["product_uom"][0][2][0], self.uom_month.id)
+            check_uom_domain = True
+        self.assertTrue(check_uom_domain)
         line.onchange_rental()
         line.product_uom_change()
         line.rental_product_id_change()
@@ -684,3 +690,19 @@ class TestRentalPricelist(RentalStockCommon):
         line.start_end_dates_product_id_change()
         self.assertEqual(line.start_date, self.today)
         self.assertEqual(line.end_date, self.tomorrow)
+
+    def test_07_copy_variant_images(self):
+        """Check option rental_service_copy_image"""
+        f = io.BytesIO()
+        Image.new("RGB", (800, 500), "#000000").save(f, "PNG")
+        f.seek(0)
+        image_black = base64.b64encode(f.read())
+        self.assertFalse(self.productA.image_variant_1920)
+        self.assertFalse(self.productA.product_rental_month_id.image_variant_1920)
+        self.assertFalse(self.productA.product_rental_day_id.image_variant_1920)
+        self.assertFalse(self.productA.product_rental_hour_id.image_variant_1920)
+        self.productA.write({"image_variant_1920": image_black})
+        self.assertTrue(self.productA.image_variant_1920)
+        self.assertTrue(self.productA.product_rental_month_id.image_variant_1920)
+        self.assertTrue(self.productA.product_rental_day_id.image_variant_1920)
+        self.assertTrue(self.productA.product_rental_hour_id.image_variant_1920)

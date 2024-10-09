@@ -1,7 +1,11 @@
 # Part of rental-vertical See LICENSE file for full copyright and licensing details.
 
+import logging
+
 from odoo import _, api, exceptions, fields, models
 from odoo.exceptions import ValidationError
+
+log = logging.getLogger(__name__)
 
 
 class ProductProduct(models.Model):
@@ -376,7 +380,7 @@ class ProductProduct(models.Model):
                 p._update_rental_service_name(vals)
             # update image and description for service product
             update_fields = [
-                "image_medium",
+                "image_variant_1920",
                 "description_sale",
                 "categ_id",
                 "rental",

@@ -25,12 +25,17 @@ class SaleOrderLine(models.Model):
         related="display_product_id.rental",
     )
 
+    sale_ok = fields.Boolean(
+        string="Can be Sold",
+        related="display_product_id.sale_ok",
+    )
+
     @api.model
     def _get_product_domain(self):
         domain = [
             "|",
             "&",
-            ("type", "=", "product"),
+            ("type", "in", ["product", "consu"]),
             "|",
             ("sale_ok", "=", True),
             ("rental", "=", True),
@@ -67,15 +72,15 @@ class SaleOrderLine(models.Model):
 
     @api.onchange("display_product_id")
     def onchange_display_product_id(self):
-        if self.display_product_id:
-            self.product_id = self.display_product_id
-            if self.display_product_id.rental:
-                self.rental = True
-            self.rental = False
-            self.can_sell_rental = False
+        self.can_sell_rental = False
         rental_type_id = self.env.ref("rental_base.rental_sale_type").id
-        if self.env.context.get("type_id", False) == rental_type_id:
+        if (
+            self.env.context.get("type_id", False) == rental_type_id
+            and self.display_product_id.rental
+        ):
             self.rental = True
+        else:
+            self.rental = False
         self._set_product_id()
 
     @api.onchange("rental")
@@ -260,10 +265,16 @@ class SaleOrderLine(models.Model):
         res = super(SaleOrderLine, self).product_id_change()
         if res is None:
             res = {}
-        if self.rental:
+        # ported from v12 we need this domain of product_uom
+        if self.product_id:
+            res["domain"] = {
+                "product_uom": [
+                    ("category_id", "=", self.product_id.uom_id.category_id.id)
+                ]
+            }
+        if self.rental and "domain" in res and "product_uom" in res["domain"]:
+            del res["domain"]["product_uom"]
             if self.display_product_id.rental:
-                if "domain" not in res:
-                    res["domain"] = {}
                 uom_ids = self._get_product_rental_uom_ids()
                 res["domain"]["product_uom"] = [("id", "in", uom_ids)]
                 if uom_ids and self.product_uom.id not in uom_ids:
