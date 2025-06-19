@@ -66,11 +66,7 @@ class SaleOrder(models.Model):
     @api.depends("type_id")
     def _compute_is_rental_order(self):
         try:
-            rental_type = (
-                self.env["ir.model.data"]
-                .sudo()
-                .get_object("rental_base", "rental_sale_type")
-            )
+            rental_type = self.sudo().env.ref("rental_base.rental_sale_type")
         except ValueError:
             for order in self:
                 order.is_rental_order = False
