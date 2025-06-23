@@ -63,16 +63,24 @@ class TestRentalPricelist(RentalStockCommon):
     def setUp(self):
         super().setUp()
 
+        self.analytic_plan = self.env["account.analytic.plan"].create(
+            {
+                "name": "Analytic Plan",
+            }
+        )
+
         self.analytic_account_A = self.env["account.analytic.account"].create(
             {
                 "name": "Analytic Account A",
                 "code": "100001",
+                "plan_id": self.analytic_plan.id,
             }
         )
         self.analytic_account_B = self.env["account.analytic.account"].create(
             {
                 "name": "Analytic Account B",
                 "code": "100002",
+                "plan_id": self.analytic_plan.id,
             }
         )
 
